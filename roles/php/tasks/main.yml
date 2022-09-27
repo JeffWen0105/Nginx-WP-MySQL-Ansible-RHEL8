@@ -1,0 +1,29 @@
+---
+# tasks file for php
+
+- name: Install php
+  yum: 
+    name: 
+      - php
+      - php-common
+      - php-mbstring
+      - php-gd
+      - php-intl
+      - php-xml
+      - php-json
+      - php-mysqlnd
+      - php-fpm
+    state: latest
+
+- name: Change user & group
+  shell: |
+    sed -i 's/user = apache/user = nginx/g' /etc/php-fpm.d/www.conf
+    sed -i 's/group = apache/group = nginx/g' /etc/php-fpm.d/www.conf
+
+- name: Start php service
+  systemd: 
+    name: php-fpm 
+    state: started 
+    enabled: yes
+
+    

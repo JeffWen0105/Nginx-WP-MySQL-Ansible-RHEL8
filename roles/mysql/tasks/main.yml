@@ -1,0 +1,35 @@
+---
+# tasks file for mysql
+
+- name: Install MySQL
+  yum: 
+    name: 
+      - mysql-server
+      - php-mysqlnd
+      - python3-PyMySQL
+    state: latest
+
+
+- name: Start mysqld service
+  systemd: 
+    name: mysqld 
+    state: started 
+    enabled: yes
+
+- name: Set DB passwd
+  mysql_user:
+    login_host: 'localhost'
+    login_user: 'root'
+    #login_password: 'tgc101'
+    name: 'root'
+    password: 'tgc101'
+    state: present
+  ignore_errors: yes
+
+- name: Creates DB For WP
+  mysql_db:
+    name: "wp"
+    state: present
+    login_user: root
+    login_password: "tgc101"
+

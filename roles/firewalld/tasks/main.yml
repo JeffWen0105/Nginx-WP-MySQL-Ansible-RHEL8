@@ -1,0 +1,19 @@
+---
+# tasks file for firewalld
+- name: Disable SELinux 
+  selinux: 
+    state: disabled
+
+- name: Disable SELinux 
+  command: /sbin/setenforce 0
+
+- name: Configure Firewall
+  firewalld: 
+    service: http 
+    permanent: yes
+    state: enabled
+
+- name: Reload Firewall
+  systemd: 
+    name: firewalld 
+    state: reloaded

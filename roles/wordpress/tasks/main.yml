@@ -1,0 +1,41 @@
+---
+# tasks file for wordpress
+- name: Download WordPress
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: "/var/www/html/"
+    remote_src: yes
+    creates: "/var/www/html/wordpress"
+
+- name: Set ownership
+  file:
+    path: "/var/www/html/"
+    state: directory
+    recurse: yes
+    owner: nginx
+    group: nginx
+
+- name: Set permissions 
+  shell: "/usr/bin/find /var/www/html/wordpress/ -type d -exec chmod 750 {} \\;"
+
+- name: Set permissions 
+  shell: "/usr/bin/find /var/www/html/wordpress/ -type f -exec chmod 640 {} \\;"
+
+- name: Copy sample config file
+  command: mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php creates=/var/www/html/wordpress/wp-config.php
+
+
+- name: Update WP config 
+  lineinfile:
+    path: "/var/www/html/wordpress/wp-config.php"
+    regexp: "{{item.regexp}}"
+    line: "{{item.line}}"
+  with_items:
+    - {'regexp': "define\\( 'DB_NAME', '(.)+' \\);", 'line': "define( 'DB_NAME', 'wp' );"}
+    - {'regexp': "define\\( 'DB_USER', '(.)+' \\);", 'line': "define( 'DB_USER', 'root' );"}
+    - {'regexp': "define\\( 'DB_PASSWORD', '(.)+' \\);", 'line': "define( 'DB_PASSWORD', 'tgc101' );"}
+  
+- name: Reload nginx service
+  systemd: 
+    name: nginx 
+    state: reloaded

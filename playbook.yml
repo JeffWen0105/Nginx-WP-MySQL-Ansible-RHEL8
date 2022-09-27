@@ -1,0 +1,9 @@
+- hosts: localhost
+  gather_facts: False
+  become: true
+  roles:
+    - nginx
+    - php
+    - mysql
+    - wordpress
+    - firewalld
