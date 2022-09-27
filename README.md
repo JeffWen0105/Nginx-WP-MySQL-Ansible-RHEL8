@@ -29,4 +29,8 @@ git clone  https://github.com/JeffWen0105/Nginx-WP-MySQL-Ansible-RHEL8.git && \
  cd Nginx-WP-MySQL-Ansible-RHEL8 && ansible-playbook playbook.yml
 ```
 
+## 執行完畢將會顯示登陸網站連結
+
+![](https://i.imgur.com/UsxMKT7.png)
+
 
