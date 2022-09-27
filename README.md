@@ -25,7 +25,7 @@
 請使用 root 角色執行
 
 ```
-
+# sudo su - root
 git clone  https://github.com/JeffWen0105/Nginx-WP-MySQL-Ansible-RHEL8.git && \
  cd Nginx-WP-MySQL-Ansible-RHEL8 && ansible-playbook playbook.yml
 ```
