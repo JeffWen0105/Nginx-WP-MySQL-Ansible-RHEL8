@@ -2,9 +2,9 @@
 
 ## 建議需求
 
-- RAM : >= 4G
-- CPU : >= 2
-- Disk : >= 40G
+- RAM : >= 2G
+- CPU : >= 1
+- Disk : >= 30G
 - OS : CentOS 8 or RHEL 8
 
 ## 套件需求
